@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+		LaunchDaemon-Beschreibung des privilegierten Helfers.
+
+		Diese Datei landet im App-Bundle unter
+		Contents/Library/LaunchDaemons/ und wird von dort per SMAppService
+		registriert. Sie wird nicht nach /Library/LaunchDaemons kopiert —
+		das erledigt macOS, und der Benutzer kann die Registrierung jederzeit
+		unter Systemeinstellungen › Allgemein › Anmeldeobjekte einsehen und
+		widerrufen.
+	-->
+	<key>Label</key>
+	<string>com.johan.NoNap.Helper</string>
+
+	<!-- Pfad relativ zum App-Bundle. -->
+	<key>BundleProgram</key>
+	<string>Contents/MacOS/NoNapHelper</string>
+
+	<!-- Der Mach-Service, über den die App den Helfer erreicht. -->
+	<key>MachServices</key>
+	<dict>
+		<key>com.johan.NoNap.Helper</key>
+		<true/>
+	</dict>
+
+	<!-- Ordnet den Daemon in den Systemeinstellungen der App zu. -->
+	<key>AssociatedBundleIdentifiers</key>
+	<array>
+		<string>com.johan.NoNap</string>
+	</array>
+
+	<!--
+		Beim Systemstart mitlaufen: Die Einstellung SleepDisabled überlebt
+		einen Neustart. Nach einem Absturz oder einem Neustart mitten in einer
+		Session muss jemand nachsehen und den Schlaf wieder freigeben — auch
+		dann, wenn die App gar nicht gestartet wird.
+	-->
+	<key>RunAtLoad</key>
+	<true/>
+
+	<!--
+		Nur nach einem Absturz neu starten, nicht nach einem sauberen Beenden.
+		Sonst würde launchd den Daemon beim Herunterfahren oder beim
+		Deinstallieren sofort wiederbeleben.
+	-->
+	<key>KeepAlive</key>
+	<dict>
+		<key>SuccessfulExit</key>
+		<false/>
+	</dict>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+</dict>
+</plist>
