@@ -5,6 +5,12 @@ Keeps your Mac awake — even with the lid closed, for a duration you choose.
 Click the menu bar icon, choose a duration, and you're done. When the
 time runs out, NoNap automatically allows sleep again.
 
+## Screenshot
+
+Click the image to enlarge it.
+
+[![NoNap menu bar panel with sleep status and session duration controls](docs/screenshots/menu-bar.png)](docs/screenshots/menu-bar.png)
+
 ## Why two parts?
 
 This is the heart of the matter and the reason the app is built the way
